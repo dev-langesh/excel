@@ -66,3 +66,23 @@ studentRecords.forEach((obj) => {
 });
 
 wb.write("./sheets/student.xlsx");
+
+const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
+
+app.use(express.json());
+
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.setHeader("Set-Cookie", "name=langesh");
+
+  res.send("hello");
+});
+
+app.get("/get-cookie", (req, res) => {
+  res.send(req.cookies);
+});
+
+app.listen(4000);
